@@ -6,11 +6,13 @@ namespace Cars.Application.Commands
 {
     public class CreateCarCommand : IRequest<CommandResultBase<Guid>>
     {
-        public CreateCarCommand(Car car)
+        public CreateCarCommand(string vin, CarType type)
         {
-            Car = car;
+            Vin = vin;
+            Type = type;
         }
 
-        public Car Car { get; }
+        public string Vin { get; }
+        public CarType Type { get; }
     }
 }

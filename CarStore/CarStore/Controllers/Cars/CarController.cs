@@ -1,4 +1,5 @@
 ﻿using Cars.Domain.Models;
+using CarStore.Api.Dtos.Cars;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarStore.Controllers.Cars
@@ -14,7 +15,7 @@ namespace CarStore.Controllers.Cars
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] Car car, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateAsync([FromBody] CreateCarRequestDto dto, CancellationToken cancellationToken)
         {
             return Ok();
         }
