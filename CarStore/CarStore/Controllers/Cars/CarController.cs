@@ -3,6 +3,7 @@ using CarStore.Api.Dtos.Cars;
 using CarStore.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarStore.Controllers.Cars
 {
@@ -80,10 +81,23 @@ namespace CarStore.Controllers.Cars
             };
         }
 
+        /// <summary>
+        /// Deletes car by Id.
+        /// </summary>
+        /// <param name="id">Id of the car to be deleted.</param>
+        /// <param name="cancellationToken">Token used for the request cancellation.</param>
         [HttpDelete("{id}/{format?}")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteAsync([FromRoute, Required] Guid id, CancellationToken cancellationToken)
         {
-            return Ok();
+            var command = new DeleteCarCommand(id);
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return result.Type switch
+            {
+                CommandResultType.Success => Ok(),
+                CommandResultType.NotFound => NotFound(),
+                _ => StatusCode(StatusCodes.Status500InternalServerError),
+            };
         }
     }
 }
