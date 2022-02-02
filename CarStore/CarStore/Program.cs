@@ -3,7 +3,11 @@ using Cars.Domain.Repos;
 using Cars.Infrastructure;
 using Cars.Infrastructure.Repos;
 using CarStore.Api.Middleware;
+using CarStore.Api.Validators;
+using FluentValidation.AspNetCore;
 using MediatR;
+using MicroElements.Swashbuckle.FluentValidation;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +19,16 @@ builder.Services.AddMediatR(typeof(CreateCarCommand));
 builder.Services.AddControllers();
 
 builder.Services
-    .AddMvc(options => options.Filters.Add<OperationCancelledExceptionFilter>());
+    .AddMvc(options => options.Filters.Add<OperationCancelledExceptionFilter>())
+    .AddFluentValidation(fv => {
+        fv.RegisterValidatorsFromAssemblyContaining<CreateCarRequestDtoValidator>();
+        fv.ValidatorFactoryType = typeof(HttpContextServiceProviderValidatorFactory);
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddFluentValidationRulesToSwagger();
 
 builder.Services.AddScoped<ICarRepo, CarRepo>();
 builder.Services.AddDbContext<CarsContext>();
