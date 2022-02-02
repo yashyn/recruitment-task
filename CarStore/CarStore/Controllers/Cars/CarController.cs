@@ -13,6 +13,7 @@ namespace CarStore.Controllers.Cars
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [FormatFilter]
     public class CarController : ControllerBase
     {
         private readonly IMediator _mediator;
