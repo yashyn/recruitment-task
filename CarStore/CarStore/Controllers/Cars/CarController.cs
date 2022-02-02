@@ -1,4 +1,5 @@
 ﻿using Cars.Application.Commands;
+using Cars.Application.Queries;
 using CarStore.Api.Dtos.Cars;
 using CarStore.Core;
 using MediatR;
@@ -22,15 +23,23 @@ namespace CarStore.Controllers.Cars
         }
 
         /// <summary>
-        /// TODO add docs
+        /// Gets car by id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of the car to be found.</param>
+        /// <param name="cancellationToken">Token used for the request cancellation.</param>
+        /// <returns>Found car.</returns>
         [HttpGet("{id}/{format?}")]
         public async Task<IActionResult> GetAsync([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            return Ok();
+            var command = new GetCarByIdQuery(id);
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return result.Type switch
+            {
+                CommandResultType.Success => Ok(),
+                CommandResultType.NotFound => NotFound(),
+                _ => StatusCode(StatusCodes.Status500InternalServerError),
+            };
         }
 
         /// <summary>
