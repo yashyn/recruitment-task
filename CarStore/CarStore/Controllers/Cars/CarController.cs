@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cars.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarStore.Controllers.Cars
 {
@@ -7,7 +8,25 @@ namespace CarStore.Controllers.Cars
     public class CarController : ControllerBase
     {
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAsync([FromRoute] Guid id, CancellationToken cancellationToken)
+        {
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync([FromBody] Car car, CancellationToken cancellationToken)
+        {
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync([FromBody] Car car, CancellationToken cancellationToken)
+        {
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             return Ok();
         }
