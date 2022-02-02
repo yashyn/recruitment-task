@@ -1,5 +1,4 @@
 ﻿using Cars.Application.Commands;
-using Cars.Domain.Models;
 using CarStore.Api.Dtos.Cars;
 using CarStore.Core;
 using MediatR;
@@ -58,9 +57,18 @@ namespace CarStore.Controllers.Cars
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] Car car, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateCarRequestDto dto, CancellationToken cancellationToken)
         {
-            return Ok();
+            var command = new UpdateCarCommand(dto.Id, dto.Vin, dto.Type);
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return result.Type switch
+            {
+                CommandResultType.Success => Ok(),
+                CommandResultType.NotFound => NotFound(),
+                CommandResultType.AlreadyExists => Conflict(dto.Vin),
+                _ => StatusCode(StatusCodes.Status500InternalServerError),
+            };
         }
 
         [HttpDelete("{id}")]
