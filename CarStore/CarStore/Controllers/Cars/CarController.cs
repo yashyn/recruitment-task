@@ -56,7 +56,16 @@ namespace CarStore.Controllers.Cars
             };
         }
 
+        /// <summary>
+        /// Update existing car.
+        /// </summary>
+        /// <param name="dto">Model describing the car to be updated.</param>
+        /// <param name="cancellationToken">Token used for the request cancellation.</param>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status409Conflict)]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateCarRequestDto dto, CancellationToken cancellationToken)
         {
             var command = new UpdateCarCommand(dto.Id, dto.Vin, dto.Type);
