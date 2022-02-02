@@ -1,5 +1,6 @@
 using Cars.Application.Commands;
 using Cars.Infrastructure;
+using CarStore.Api.Middleware;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,10 @@ builder.Services.AddMediatR(typeof(CreateCarCommand));
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services
+    .AddMvc(options => options.Filters.Add<OperationCancelledExceptionFilter>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
