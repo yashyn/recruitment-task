@@ -5,5 +5,6 @@
         Success,
         NotFound,
         AlreadyExists,
+        InternalError,
     }
 }
