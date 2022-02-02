@@ -1,6 +1,9 @@
+using Cars.Application.Commands;
 using Cars.Infrastructure;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMediatR(typeof(CreateCarCommand));
 
 // Add services to the container.
 

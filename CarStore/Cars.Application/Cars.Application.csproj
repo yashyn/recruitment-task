@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cars.Domain\Cars.Domain.csproj" />
+    <ProjectReference Include="..\CarStore.Core\CarStore.Core.csproj" />
   </ItemGroup>
 
 </Project>
