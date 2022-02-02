@@ -36,7 +36,7 @@ namespace CarStore.Controllers.Cars
 
             return result.Type switch
             {
-                CommandResultType.Success => Ok(),
+                CommandResultType.Success => Ok(result.Data),
                 CommandResultType.NotFound => NotFound(),
                 _ => StatusCode(StatusCodes.Status500InternalServerError),
             };
