@@ -1,7 +1,7 @@
 ﻿using CarStore.Api.Dtos.Cars;
 using FluentValidation;
 
-namespace CarStore.Api.Validators
+namespace CarStore.Api.Validators.Cars
 {
     public class CreateCarRequestDtoValidator : AbstractValidator<CreateCarRequestDto>
     {

@@ -3,7 +3,7 @@ using Cars.Domain.Repos;
 using Cars.Infrastructure;
 using Cars.Infrastructure.Repos;
 using CarStore.Api.Middleware;
-using CarStore.Api.Validators;
+using CarStore.Api.Validators.Cars;
 using FluentValidation.AspNetCore;
 using MediatR;
 using MicroElements.Swashbuckle.FluentValidation;
