@@ -12,5 +12,10 @@ namespace Cars.Infrastructure
             // TODO pass from environment variable
             optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=admin;Database=recrtask;SSL Mode=Disable;Port=5432");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        }
     }
 }
