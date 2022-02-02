@@ -4,10 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarStore.Controllers.Cars
 {
+    /// <summary>
+    /// TODO add docs
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CarController : ControllerBase
     {
+        /// <summary>
+        /// TODO add docs
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute] Guid id, CancellationToken cancellationToken)
         {
