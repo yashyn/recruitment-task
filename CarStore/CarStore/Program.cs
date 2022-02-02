@@ -16,7 +16,8 @@ builder.Services.AddMediatR(typeof(CreateCarCommand));
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.RespectBrowserAcceptHeader = true)
+    .AddXmlSerializerFormatters();
 
 builder.Services
     .AddMvc(options => options.Filters.Add<OperationCancelledExceptionFilter>())

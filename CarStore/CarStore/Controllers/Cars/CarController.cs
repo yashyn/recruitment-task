@@ -26,7 +26,7 @@ namespace CarStore.Controllers.Cars
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}/{format?}")]
         public async Task<IActionResult> GetAsync([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             return Ok();
@@ -38,7 +38,7 @@ namespace CarStore.Controllers.Cars
         /// <param name="dto">Model describing properties of the car to be created.</param>
         /// <param name="cancellationToken">Token used for the request cancellation.</param>
         /// <returns>Id of the created Car in Guid format.</returns>
-        [HttpPost]
+        [HttpPost("{format?}")]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status409Conflict)]
@@ -61,7 +61,7 @@ namespace CarStore.Controllers.Cars
         /// </summary>
         /// <param name="dto">Model describing the car to be updated.</param>
         /// <param name="cancellationToken">Token used for the request cancellation.</param>
-        [HttpPut]
+        [HttpPut("{format?}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
@@ -80,7 +80,7 @@ namespace CarStore.Controllers.Cars
             };
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/{format?}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             return Ok();
