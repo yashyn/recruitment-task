@@ -1,5 +1,7 @@
 using Cars.Application.Commands;
+using Cars.Domain.Repos;
 using Cars.Infrastructure;
+using Cars.Infrastructure.Repos;
 using CarStore.Api.Middleware;
 using MediatR;
 
@@ -19,6 +21,7 @@ builder.Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ICarRepo, CarRepo>();
 builder.Services.AddDbContext<CarsContext>();
 
 var app = builder.Build();
